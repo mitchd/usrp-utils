@@ -323,3 +323,13 @@ $mkdir build
 $cd build
 $cmake -DDEBUG=1 ..
 $make
+
+You can change the wire format and host format for the various programs with:
+
+To enable sc8 wire format (default sc16) (Affects usrp-energy usrp-recorder and
+usrp-sensor)
+-DWIRE_SC8=1
+
+To enable sc16 host format (default fc32) (Only affects usrp-recorder)
+-DHOST_SC16=1
+
