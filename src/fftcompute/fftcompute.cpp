@@ -1,7 +1,6 @@
-/*Copyright 2012 Joseph "Mitch" Davis mitchd@vt.edu
- *Copyright 2012 Virginia Tech
+/*Copyright 2013,2012 Joseph "Mitch" Davis mitchd@vt.edu
  *
- *This file is part of fftcompute.
+ *This file is part of usrp-utils.
  *   fftcompute is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation, either version 3 of the License, or
@@ -13,7 +12,7 @@
  *   GNU General Public License for more details.
  *
  *   You should have received a copy of the GNU General Public License
- *   along with fftcompute.  If not, see <http://www.gnu.org/licenses/>.
+ *   along with usrp-utils.  If not, see <http://www.gnu.org/licenses/>.
  *
  *
  *This program is designed to leverage single-precision fftw3 libraries and
