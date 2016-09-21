@@ -188,14 +188,14 @@ void useage();
 int openFiles( const char*  outputFileName,
                FILE*&       outputFile );
 
-/*createFFTPlans( fftwf_plan*&, float complex**&, float complex**&,
+/*createFFTPlans( fftwf_plan*&, _Complex float**&, _Complex float**&,
                   int, int)
  *
  *Initialize the FFT plans.  This creates max_children plans for FFTSize FFTs
  */
 void createFFTPlans( fftwf_plan*&     plans,
-                     float complex**& inputData,
-                     float complex**& outputData,
+                     _Complex float**& inputData,
+                     _Complex float**& outputData,
                      int              FFTSize,
                      int              max_children );
 
@@ -213,8 +213,8 @@ int initializeThreads( pthread_mutex_t&         mutex,
                        struct fft_thread_data*& fft_child_args,
                        FILE*&                   outputFile,
                        fftwf_plan*&             plans,
-                       float complex**&         inputData,
-                       float complex**&         outputData,
+                       _Complex float**&         inputData,
+                       _Complex float**&         outputData,
                        float*&                  window,
                        int                      FFTSize,
                        int*&                    thread_control );
@@ -583,20 +583,20 @@ int openFiles( const char*  outputFileName,
 
 *******************************************************************************/
 void createFFTPlans( fftwf_plan*&     plans,
-                     float complex**& inputData,
-                     float complex**& outputData,
+                     _Complex float**& inputData,
+                     _Complex float**& outputData,
                      int              FFTSize,
                      int              max_children )
 {
   plans       = new fftwf_plan[ max_children ];
-  inputData   = new float complex*[ max_children ];
-  outputData  = new float complex*[ max_children ];
+  inputData   = new _Complex float*[ max_children ];
+  outputData  = new _Complex float*[ max_children ];
 
   //Setup the FFT plans -- create one for each child thread
   for(int i = 0; i < max_children; i++ )
   {
-    inputData[i]  = new float complex[FFTSize];
-    outputData[i] = new float complex[FFTSize];
+    inputData[i]  = new _Complex float[FFTSize];
+    outputData[i] = new _Complex float[FFTSize];
     plans[i]      = fftwf_plan_dft_1d( FFTSize, inputData[i], outputData[i],
                                        FFTW_FORWARD, FFTW_EXHAUSTIVE );
   }
@@ -626,8 +626,8 @@ int initializeThreads( pthread_mutex_t&         mutex,
                        struct fft_thread_data*& fft_child_args,
                        FILE*&                   outputFile,
                        fftwf_plan*&             plans,
-                       float complex**&         inputData,
-                       float complex**&         outputData,
+                       _Complex float**&         inputData,
+                       _Complex float**&         outputData,
                        float*&                  window,
                        int                      FFTSize,
                        int*&                    thread_control )
@@ -727,7 +727,7 @@ int calculateTask(  const char*                   outputFileName,
   ///////////////////////////////////////////////////////////
 
   //Number of bytes in a single-precision float
-  const int   FLOAT_COMPLEX_SIZE  = sizeof(float complex);
+  const int   FLOAT_COMPLEX_SIZE  = sizeof(_Complex float);
   const char  msg_thread_start    = static_cast<char>(__FFT_THREAD_START);
   const char  msg_thread_kill     = static_cast<char>(__FFT_THREAD_KILL);
 
@@ -739,8 +739,8 @@ int calculateTask(  const char*                   outputFileName,
 
   //Create some FFT Plans
   fftwf_plan     *plans       = NULL;
-  float complex **inputData   = NULL;
-  float complex **outputData  = NULL;
+  _Complex float **inputData   = NULL;
+  _Complex float **outputData  = NULL;
 
   createFFTPlans( plans, inputData, outputData, FFTSize, max_children );
 
@@ -828,7 +828,7 @@ int calculateTask(  const char*                   outputFileName,
 
   //Setup the input buffer and tracking variables
   int                   fft_interval_size = FFTSize / FFTOverlap;
-  float complex*        input_buffer      = new float complex[FFTSize];
+  _Complex float*        input_buffer      = new _Complex float[FFTSize];
   int                   head              = 0;
   int                   child_tracker     = 0;
   bool                  isFull            = false;
@@ -838,7 +838,7 @@ int calculateTask(  const char*                   outputFileName,
     return_code = 0;
 
   //Setup the USRP for streaming
-  vector<float complex>   usrpBuffer( fft_interval_size );
+  vector<_Complex float>   usrpBuffer( fft_interval_size );
   uhd::stream_args_t      stream_args(__USRP_CPU_FMT, __USRP_WIRE_FMT );
   uhd::rx_streamer::sptr  usrp_rx_stream = usrp->get_rx_stream(stream_args);
   uhd::rx_metadata_t      rx_md;

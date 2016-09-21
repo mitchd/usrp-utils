@@ -373,7 +373,7 @@ int calculateTask(  const char*                   outputFileName,
   int                   return_code       = 1;
 
   //Setup the USRP for streaming
-  vector<float complex>   usrpBuffer( binSize );
+  vector<_Complex float >   usrpBuffer( binSize );
   float                   energy;
   uhd::stream_args_t      stream_args(__USRP_CPU_FMT, __USRP_WIRE_FMT );
   uhd::rx_streamer::sptr  usrp_rx_stream = usrp->get_rx_stream(stream_args);

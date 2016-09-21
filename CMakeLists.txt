@@ -28,5 +28,6 @@ set(CMAKE_MODULE_PATH ${USRPutils_SOURCE_DIR}/cmake/Modules)
 find_package(UHD REQUIRED)
 find_package(FFTW3f REQUIRED)
 find_package(Threads REQUIRED)
+find_package(Boost COMPONENTS system REQUIRED)
 
 add_subdirectory(src)

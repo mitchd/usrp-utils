@@ -42,10 +42,10 @@ struct fft_thread_data
 
     fftwf_plan        plan;           //fftw3 fft plan
 
-    float complex*    outputData;     //fft output data (only valid after
+    _Complex float*    outputData;     //fft output data (only valid after
     //fftw_execute)
 
-    float complex*    inputData;      //fft input data (depending on the fft plan,
+    _Complex float*    inputData;      //fft input data (depending on the fft plan,
     //these data may get destroyed)
 
     float*            window;         //window function
