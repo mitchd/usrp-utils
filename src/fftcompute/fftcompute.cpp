@@ -1,4 +1,4 @@
-/*Copyright 2013,2012 Joseph "Mitch" Davis mitchd@vt.edu
+/*Copyright 2012-2016 Joseph "Mitch" Davis mitchd@vt.edu
  *
  *This file is part of usrp-utils.
  *   fftcompute is free software: you can redistribute it and/or modify
