@@ -233,6 +233,10 @@ int main( int argc, char* argv[])
     delete [] hostfmt;
     return 1;
   }
+  uhd::stream_cmd_t       usrp_stream_stop(uhd::stream_cmd_t::STREAM_MODE_STOP_CONTINUOUS);
+  usrp_stream_stop.stream_now = false;
+  usrp_stream_stop.time_spec = uhd::time_spec_t();
+  the_usrp->issue_stream_cmd( usrp_stream_stop );
   delete [] outputFileName;
   delete [] usrpArgs;
   return 0;
