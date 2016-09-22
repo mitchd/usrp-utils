@@ -597,7 +597,8 @@ void createFFTPlans( fftwf_plan*&     plans,
   {
     inputData[i]  = new _Complex float[FFTSize];
     outputData[i] = new _Complex float[FFTSize];
-    plans[i]      = fftwf_plan_dft_1d( FFTSize, inputData[i], outputData[i],
+    plans[i]      = fftwf_plan_dft_1d( FFTSize, (fftwf_complex*)inputData[i], 
+                                       (fftwf_complex*)outputData[i],
                                        FFTW_FORWARD, FFTW_EXHAUSTIVE );
   }
 

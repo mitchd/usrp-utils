@@ -403,8 +403,8 @@ int calculateTask(  const char*                   outputFileName,
     const int COMPLEX_SIZE = sizeof( complex int16_t );
     vector<complex int16_t> usrpBuffer(sample_size);
 #else
-    const int COMPLEX_SIZE = sizeof( _Complex float );
-    vector<_Complex float> usrpBuffer(sample_size);
+    const int COMPLEX_SIZE = sizeof( std::complex<float> );
+    vector<std::complex<float>> usrpBuffer(sample_size);
 #endif    
   //Initialize and open the input/output files
   FILE *outputFile;
